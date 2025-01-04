@@ -40,6 +40,6 @@ class AdvertisementSerializer(serializers.ModelSerializer):
     def validate(self, data):
         """Метод для валидации. Вызывается при создании и обновлении."""
 
-        # TODO: добавьте требуемую валидацию
-
+        if data['author'] == self.context["request"].user:
+            raise serializers.ValidationError('Logged in User is not an Author')
         return data
